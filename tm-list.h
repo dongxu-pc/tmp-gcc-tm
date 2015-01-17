@@ -5,12 +5,12 @@ struct list_head {
 
 #define LIST_HEAD_INIT(name) { &(name), &(name) }
 
-static inline void list_add_head(struct list_head *ne, struct list_head *head) {
+static inline void list_add_tail(struct list_head *ne, struct list_head *head) {
   __transaction_atomic {
-    head->next->prev = ne;
-    ne->next = head->next;
-    ne->prev = head;
-    head->next = ne;
+    head->prev->next = ne;
+    ne->prev = head->prev;
+    ne->next = head;
+    head->prev = ne;
   }
 }
 
